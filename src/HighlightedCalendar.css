@@ -1,0 +1,35 @@
+.cal-container {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  
+  .cal-header {
+    background-color: #4f46e5;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.25rem;
+  }
+  
+  .cal-day {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .highlighted-date {
+    border: 1px solid black !important;
+    background-color: #b8b5ef;
+    color: white;
+  }
+  
+  .highlighted-content {
+    font-size: 0.8rem;
+    color: yellow;
+  }
+
+  .react-calendar {
+    width: 100%;
+    background-color:  #f3f3f3;  /* Set your desired background color */
+    border: 1px solid #ccc;  /* Add a border for better visibility */
+  }
