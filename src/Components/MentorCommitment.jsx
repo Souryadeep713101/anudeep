@@ -52,13 +52,14 @@ console.log("Form Submitted")
 
 
   return (
-<div className='flex justify-center w-screen h-full flex-col justify-around'>  
-<form className='flex flex-col align-center justify-between w-1/2  p-10 border bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700' onSubmit={onSubmit}>
+<div className='flex items-center justify-between w-screen h-full flex-col justify-around'>  
+<form className='flex flex-col align-center justify-between w-1/2  p-10 border bg-white border border-gray-200 rounded-lg shadow-lg' onSubmit={onSubmit}>
 
 
 <div>
 <label htmlFor="select-programme" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Programme</label>
-<select name="select-programme" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<select name="select-programme" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+<option value="NULL">Select A Programme</option>
   <option value="Java">Java</option>
   <option value="C++">C++</option>
   <option value="Python">Python</option>
@@ -66,7 +67,8 @@ console.log("Form Submitted")
 </select>
 </div>
 <div><label htmlFor="programme-tenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programme Tenure</label>
-<select name="programme-tenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<select required name="programme-tenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<option value="NULL">Select Tenure</option>
   <option value="1year">1year</option>
   <option value="2year">2year</option>
   <option value="3year">3year</option>
@@ -75,12 +77,13 @@ console.log("Form Submitted")
 </div>
 <div>
 <label htmlFor="programme-tenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>  
-<Datepicker/>
+<Datepicker required/>
 </div>
 <div className='flex justify-between'>
   <div >
   <label htmlFor="time-input" className="block text-sm font-medium text-gray-700">Start Time</label>
   <input
+  required
     type="time"
     id="time-input"
     name="time-input"
@@ -90,6 +93,7 @@ console.log("Form Submitted")
 <div >
 <label htmlFor="time-input" className="block text-sm font-medium text-gray-700">End Time</label>
   <input
+  required
     type="time"
     id="time-input"
     name="time-input"
@@ -139,7 +143,7 @@ console.log("Form Submitted")
 
 
 
-<div className="cal-container">
+<div className="cal-container rounded-lg p-10">
       <div className="cal-header">
         <h2>Booked Dates</h2>
       </div>

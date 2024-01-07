@@ -9,7 +9,7 @@ export default function Home() {
     <Navbar
     fluid={true}
     rounded={true}
-    className= "bg-lime-200 shadow-2xl"
+    className= "bg-purple-200 shadow-2xl"
    >
     <Navbar.Brand>
        <img width="130" height="200"
