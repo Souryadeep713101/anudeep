@@ -76,7 +76,7 @@ export default function Home() {
     
     
       
-      <div className='grow bg-gray-50 p-10 mid-container'>
+      <div className='grow p-10 mid-container'>
       <Outlet />
       </div>
 
