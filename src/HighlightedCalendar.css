@@ -1,7 +1,8 @@
 .cal-container {
     max-width: 50%;
     margin: 1rem auto;
-
+   
+    
   }
   
   .cal-header {
@@ -10,6 +11,7 @@
     text-align: center;
     padding: 1rem;
     font-size: 1.25rem;
+    
   }
   
   .cal-day {
@@ -20,7 +22,7 @@
   
   .highlighted-date {
     border: 1px solid black !important;
-    background-color: #b8b5ef;
+    background-color: #e8151c;
     color: white;
   }
   
@@ -30,7 +32,9 @@
   }
 
   .react-calendar {
+
     width: 100%;
+    border-radius: 1%;
     background-color:  #f3f3f3;  /* Set your desired background color */
     border: 1px solid #ccc;  /* Add a border for better visibility */
   }

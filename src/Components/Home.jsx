@@ -9,7 +9,7 @@ export default function Home() {
     <Navbar
     fluid={true}
     rounded={true}
-    className= "bg-purple-200 shadow-2xl"
+    className= "bg-lime-200 shadow-xl relative z[1]"
    >
     <Navbar.Brand>
        <img width="130" height="200"
@@ -47,7 +47,16 @@ export default function Home() {
   
          <Link to="/MentorCommitment">MentorCommitment</Link>
        </Navbar.Link>
+       <Navbar.Link
+       
+        
+       >
   
+    
+  
+  
+         <Link to="/ApproveMentor">Approve Mentors</Link>
+       </Navbar.Link>
   
        <Navbar.Link
        
@@ -67,7 +76,7 @@ export default function Home() {
     
     
       
-      <div className='grow bg-gray-50 p-10'>
+      <div className='grow bg-gray-50 p-10 mid-container'>
       <Outlet />
       </div>
 

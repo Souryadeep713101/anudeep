@@ -1,42 +1,14 @@
 import React , {useState} from 'react'
 import { Datepicker } from 'flowbite-react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import '../HighlightedCalendar.css'
+import CommitmentCalendar from './CommitmentCalendar';
+import { toast } from 'react-toastify';
 
 export default function MentorCommitment() {
 
 
-  const [activeStartDate ,  setActiveStartDate] = useState(new Date())
-const highlightedDays = [
-  { day: 1, time: '10:00 AM to 12:00 PM' }, // Monday
-  { day: 5, time: '10 AM to 12 PM' }, // Friday
-];
-
-const tileClassName = ({ date }) => {
-  return (date.getDay() === 1 || date.getDay() === 5) ? 'highlighted-date' : '';
-};
-const tileContent = ({ date }) => {
-  const dayInfo = highlightedDays.find(day => date.getDay() === day.day);
-  return dayInfo ? <div className="highlighted-content">{dayInfo.time}</div> : null;
-};
-// const onChange = ({date})=>{
-// console.log("Calendar Changed")
-// if(date > new Date("30-01-2024")) console.log("No Data for the next month")
-// }
-
-const maxAllowedDate = new Date('2024 , 01 , 30')
-const handleActiveStartDateChange = ({ activeStartDate }) => {
-  if (activeStartDate > maxAllowedDate) {
-    setActiveStartDate(maxAllowedDate);
-    // Optionally, you can show a message or take other actions
-    console.warn('Reached the maximum allowed date');
-  } else {
-    setActiveStartDate(activeStartDate);
-  }
-};
 
   const [selectedDays, setSelectedDays] = useState([]);
+  const [formData , setFormData] = useState({})
 
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
@@ -44,21 +16,37 @@ const handleActiveStartDateChange = ({ activeStartDate }) => {
     } else {
       setSelectedDays([...selectedDays, day]);
     }
+    setFormData((prevFormData)=>{ return { ...prevFormData, ["selected-days"] : [...selectedDays ,day] }})
   };
+
+
+ const onChange = (e)=>{
+   setFormData((prevFormData)=>{
+    return {...prevFormData , [e.target.name]  : e.target.value}
+   })
+
+
+ } 
 const onSubmit = (e)=>{
 e.preventDefault();
-console.log("Form Submitted")
+
+toast.success('🦄 Commited Successfully');
+console.log(formData)
+e.target.reset()
+setSelectedDays([])
+setFormData({})
+
 }
 
 
   return (
-<div className='flex items-center justify-between w-screen h-full flex-col justify-around'>  
+<div className='flex items-center justify-between w-full h-full flex-col justify-around'>  
 <form className='flex flex-col align-center justify-between w-1/2  p-10 border bg-white border border-gray-200 rounded-lg shadow-lg' onSubmit={onSubmit}>
 
 
-<div>
+<div className='input-container'>
 <label htmlFor="select-programme" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Programme</label>
-<select name="select-programme" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+<select  onChange = {onChange}name="select-programme" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
 <option value="NULL">Select A Programme</option>
   <option value="Java">Java</option>
   <option value="C++">C++</option>
@@ -66,8 +54,8 @@ console.log("Form Submitted")
   <option value="React">React</option>
 </select>
 </div>
-<div><label htmlFor="programme-tenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programme Tenure</label>
-<select required name="programme-tenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<div className='input-container'><label htmlFor="programme-tenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programme Tenure</label>
+<select   onChange = {onChange} required name="programme-tenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 <option value="NULL">Select Tenure</option>
   <option value="1year">1year</option>
   <option value="2year">2year</option>
@@ -75,28 +63,34 @@ console.log("Form Submitted")
   <option value="4year">4year</option>
 </select>
 </div>
-<div>
+<div className='input-container'>
 <label htmlFor="programme-tenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>  
-<Datepicker required/>
+<Datepicker onSelectedDateChanged={(date)=>{
+  setFormData((prevFormData)=>{
+    return {...prevFormData , ["start-date"] : date }
+  })
+}}  required/>
 </div>
-<div className='flex justify-between'>
+<div className='flex justify-between input-container'>
   <div >
-  <label htmlFor="time-input" className="block text-sm font-medium text-gray-700">Start Time</label>
+  <label htmlFor="time-input-start" className="block text-sm font-medium text-gray-700 w-full">Start Time</label>
   <input
+  onChange={onChange}
   required
     type="time"
     id="time-input"
-    name="time-input"
+    name="time-input-start"
     className="mt-1 p-2.5 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
   />
 </div>
 <div >
 <label htmlFor="time-input" className="block text-sm font-medium text-gray-700">End Time</label>
   <input
+  onChange={onChange}
   required
     type="time"
-    id="time-input"
-    name="time-input"
+    id="time-input-end"
+    name="time-input-end"
     className="mt-1 p-2.5 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
   />
  </div> 
@@ -141,23 +135,9 @@ console.log("Form Submitted")
 
 </form>
 
+<CommitmentCalendar/>
 
 
-<div className="cal-container rounded-lg p-10">
-      <div className="cal-header">
-        <h2>Booked Dates</h2>
-      </div>
-    <Calendar
-      onActiveStartDateChange={(args) => {
-        handleActiveStartDateChange(args)
-      }} 
-      tileClassName={tileClassName}
-      tileContent= {tileContent}
-      readOnly = {true}
-      value={activeStartDate}
-      maxDate={maxAllowedDate}
-    />
-  </div>
 </div> 
   
 
