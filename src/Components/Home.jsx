@@ -15,7 +15,7 @@ export default function Home() {
        <img width="130" height="200"
         src="https://www.anudip.org/wp-content/uploads/2018/07/logow.png"
        
-        alt="Flowbite Logo"
+        alt="Anudip Logo"
       />
       
     </Navbar.Brand>

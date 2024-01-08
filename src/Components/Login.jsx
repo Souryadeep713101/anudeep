@@ -1,10 +1,11 @@
 import React from "react";
 
 export default function Login() {
+
   return (
     <div className="login-page m-auto p-16 flex items-center justify-center relative">
-      <div className="login-gradient"></div>
-      <div className="fixed max-w-sm mx-auto w-4/5 sm:w-3/5 h-3/5 flex items-center justify-center backdrop-blur-md bg-[rgba(255,255,255,0.3)] rounded-lg shadow-2xl">
+      <div className="login-gradient relative"></div>
+      <div className="absolute max-w-sm mx-auto w-4/5 sm:w-3/5 h-3/5 flex items-center justify-center backdrop-blur-md bg-[rgba(255,255,255,0.3)] rounded-lg shadow-2xl">
         <img
           src="/illustration.png"
           alt="illustration"
@@ -13,16 +14,16 @@ export default function Login() {
         <form className="flex flex-col mx-auto w-4/5 z-[2]">
           <div className="mb-5">
             <label
-              for="email"
+              for="username"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Your email
+              Your username
             </label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="username"
               className="form-input bg-[rgba(255,255,255,0.3)] border-2 border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-gray-400 focus:outline-none focus:outline-0 focus:border-teal-400 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark dark:focus:outline-none dark:focus:outline-0 dark:focus:border-teal-400 dark:focus:border-2 duration-200 focus:shadow-inner"
-              placeholder="name@mail.com"
+              placeholder="your-name"
               required
             />
           </div>
@@ -45,7 +46,7 @@ export default function Login() {
             type="submit"
             className="mt-4 text-white bg-teal-400 hover:bg-teal-500 focus:outline-none font-medium rounded-lg text-sm self-center w-auto px-5 py-2.5 text-center dark:bg-teal-400 dark:hover:bg-teal-500 duration-200 focus:shadow-inner hover:shadow-inner"
           >
-            <span className="">Submit</span>
+            Submit
           </button>
         </form>
       </div>
