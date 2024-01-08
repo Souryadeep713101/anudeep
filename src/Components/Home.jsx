@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, Outlet} from "react-router-dom"
-import { Navbar } from 'flowbite-react'
+import { Navbar , Footer } from 'flowbite-react'
+import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
 
 export default function Home() {
   return (
@@ -8,12 +9,13 @@ export default function Home() {
     <Navbar
     fluid={true}
     rounded={true}
-  >
+    className= "bg-lime-200 shadow-xl relative z[1]"
+   >
     <Navbar.Brand>
        <img width="130" height="200"
         src="https://www.anudip.org/wp-content/uploads/2018/07/logow.png"
-        className=""
-        alt="Flowbite Logo"
+       
+        alt="Anudip Logo"
       />
       
     </Navbar.Brand>
@@ -22,7 +24,7 @@ export default function Home() {
      
      
       <Navbar.Link
-       
+      
         
       >
         <Link to="/">Programme View</Link>
@@ -35,8 +37,26 @@ export default function Home() {
          <Link to="/login">Login</Link>
        </Navbar.Link>
    
+       <Navbar.Link
+       
+        
+       >
+  
+    
   
   
+         <Link to="/MentorCommitment">MentorCommitment</Link>
+       </Navbar.Link>
+       <Navbar.Link
+       
+        
+       >
+  
+    
+  
+  
+         <Link to="/ApproveMentor">Approve Mentors</Link>
+       </Navbar.Link>
   
        <Navbar.Link
        
@@ -56,8 +76,29 @@ export default function Home() {
     
     
       
-      
+      <div className='grow p-10 mid-container'>
       <Outlet />
+      </div>
+
+
+    <footer  className="flex justify-around p-10 bg-lime-200 shadow-xl">
+      
+      <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+            
+            <Footer.Icon href="#" icon={BsFacebook} />
+            <Footer.Icon href="#" icon={BsInstagram} />
+            <Footer.Icon href="#" icon={BsTwitter} />
+            <Footer.Icon href="#" icon={BsGithub} />
+            <Footer.Icon href="#" icon={BsDribbble} />
+      
+   
+    </div>
+
+
+    
+
+    </footer>
+   
   </>
   )
 }
