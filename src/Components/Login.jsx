@@ -1,6 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [response, setResponse] = useState({ success: "", userType: "" });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const apiEndpoint = "http://localhost:8080/mentor/login";
+      const requestBody = { username, password };
+
+      const response = await axios.post(apiEndpoint, requestBody);
+
+      if (response.success) {
+        toast.success("Login successful!", {
+          position: "top-right",
+          autoClose: 5000, // milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      } else {
+        toast.success("Wrong username or password!", {
+          position: "top-right",
+          autoClose: 5000, // milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+
+      setResponse({ ...response });
+      console.log(response);
+    } catch (e) {
+      toast.error("Login failed. Please try again.", {
+        position: "top-right",
+        autoClose: 3000, // milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      console.error("Error during login: ", e);
+    }
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div className="login-page m-auto p-16 flex items-center justify-center relative">
@@ -11,7 +59,10 @@ export default function Login() {
           alt="illustration"
           className="illustration absolute top-[-10%] right-0 w-3/5 "
         />
-        <form className="flex flex-col mx-auto w-4/5 z-[2]">
+        <form
+          className="flex flex-col mx-auto w-4/5 z-[2]"
+          onSubmit={handleSubmit}
+        >
           <div className="mb-5">
             <label
               for="username"
@@ -23,6 +74,8 @@ export default function Login() {
               type="text"
               id="username"
               className="form-input bg-[rgba(255,255,255,0.3)] border-2 border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-gray-400 focus:outline-none focus:outline-0 focus:border-teal-400 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark dark:focus:outline-none dark:focus:outline-0 dark:focus:border-teal-400 dark:focus:border-2 duration-200 focus:shadow-inner"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="your-name"
               required
             />
@@ -38,6 +91,8 @@ export default function Login() {
               type="password"
               id="password"
               className="form-input bg-[rgba(255,255,255,0.3)] border-2 border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-gray-400 focus:outline-none focus:border-teal-400 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark dark:focus:outline-none dark:focus:outline-0 dark:focus:border-teal-400 dark:focus:border-2 duration-200 focus:shadow-inner"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
             />
