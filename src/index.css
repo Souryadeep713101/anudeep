@@ -43,18 +43,19 @@
 /* ----------BACKGROUND---------- */
 
 .mid-container {
-  /* background-image: url("https://as2.ftcdn.net/v2/jpg/06/27/03/25/1000_F_627032522_quEReHvLygNHpCLKcCSgsHYeGjuAy1NU.jpg");
-  background-size: 50%;
- background-repeat: repeat; */
+
   background-color: #ffffff;
   opacity: 1;
-  background-image: repeating-radial-gradient(
+background-image: repeating-radial-gradient(
       circle at 0 0,
       transparent 0,
       #ffffff 30px
     ),
-    repeating-linear-gradient(#eeffcc55, #eeffcc);
-}
+    repeating-linear-gradient(#eeffcc55, #eeffcc); 
+  
+
+
+  }
 
 .input-container {
   padding-bottom: 1rem;

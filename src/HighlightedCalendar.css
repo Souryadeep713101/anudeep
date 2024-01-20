@@ -1,5 +1,5 @@
 .cal-container {
-    max-width: 50%;
+  
     margin: 1rem auto;
    
     
@@ -15,6 +15,7 @@
   }
   
   .cal-day {
+    min-height: fit-content;
     text-align: center;
     font-size: 1rem;
     padding: 0.5rem;
@@ -28,12 +29,13 @@
   
   .highlighted-content {
     font-size: 0.8rem;
-    color: yellow;
+    color: rgb(5, 247, 5);
   }
 
   .react-calendar {
-
     width: 100%;
+    min-width: min-content;
+    min-height: min-content;
     border-radius: 1%;
     background-color:  #f3f3f3;  /* Set your desired background color */
     border: 1px solid #ccc;  /* Add a border for better visibility */
