@@ -1,4 +1,4 @@
 import React from "react"
 export default function StudentDetails(){
-    return <div>hi</div>
+    return <div>Hello</div>
 }
