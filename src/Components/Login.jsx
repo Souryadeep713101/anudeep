@@ -6,35 +6,26 @@ import axios from "axios";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [response, setResponse] = useState({ success: "", userType: "" });
+  const [response, setResponse] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiEndpoint = "http://localhost:8080/mentor/login";
-      const requestBody = { username, password };
+      const apiEndpoint =
+        "http://143.110.181.19/mentoring-api/public/api/login";
+      const requestBody = { user_id: username, password: password };
 
-      const response = await axios.post(apiEndpoint, requestBody);
+      const responseRecv = await axios.post(apiEndpoint, requestBody);
 
-      if (response.success) {
-        toast.success("Login successful!", {
-          position: "top-right",
-          autoClose: 5000, // milliseconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      } else {
-        toast.success("Wrong username or password!", {
-          position: "top-right",
-          autoClose: 5000, // milliseconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      }
+      toast.success("Login successful!", {
+        position: "top-right",
+        autoClose: 5000, // milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
 
-      setResponse({ ...response });
+      setResponse({ responseRecv });
       console.log(response);
     } catch (e) {
       toast.error("Login failed. Please try again.", {
