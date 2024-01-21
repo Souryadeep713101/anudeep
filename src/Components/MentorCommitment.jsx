@@ -1,16 +1,22 @@
-import React , {useState} from 'react'
+import React , {useState ,useEffect , useContext} from 'react'
 import { Datepicker } from 'flowbite-react';
 import CommitmentCalendar from './CommitmentCalendar';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import ProgrammeContext from '../Context/PorgrammeContext';
 
 export default function MentorCommitment() {
 
 
-
+  const {programmeDetails} = useContext(ProgrammeContext)
+  const [programmeNames , setProgrammeNames] = useState([])
   const [selectedDays, setSelectedDays] = useState([]);
   const [formData , setFormData] = useState({})
-
+  useEffect(()=>{
+    if(programmeDetails.length > 0)setProgrammeNames(programmeDetails.map((programme)=>{return programme.programmeName}))
+    
+    
+    } , [programmeDetails])
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
@@ -60,10 +66,10 @@ catch(e) {
 <label htmlFor="selectedProgramme" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Programme</label>
 <select   name="selectedProgramme" onChange = {onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 <option value="" disabled selected hidden>Select Programme</option>
-  <option value="Java">Java</option>
-  <option value="C++">C++</option>
-  <option value="Python">Python</option>
-  <option value="React">React</option>
+ {programmeNames.map(programme=>{
+    return  <option value={programme}>{programme}</option>
+ })}
+
 </select>
 </div>
 <div className='input-container'><label htmlFor="programmeTenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programme Tenure(in months)</label>
@@ -145,7 +151,6 @@ onSelectedDateChanged={(date)=>{
 
 </form>
 
-<CommitmentCalendar/>
 
 
 </div> 

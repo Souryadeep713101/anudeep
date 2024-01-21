@@ -1,22 +1,35 @@
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useState , useContext } from "react";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-
+import UserContext from "../Context/UserContext";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const anudeepLoginURL =  process.env.REACT_APP_ANUDEEP_LOGIN;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [response, setResponse] = useState({ success: "", userType: "" });
-
+  const  {setUserSessionDetails} = useContext(UserContext);
+ const navigate = useNavigate(); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiEndpoint = "http://localhost:8080/mentor/login";
-      const requestBody = { username, password };
+  
 
-      const response = await axios.post(apiEndpoint, requestBody);
-
-      if (response.success) {
+      const response  = await axios.post(anudeepLoginURL , {
+        user_id : username , 
+        password : password } , 
+        {
+         method: 'post',
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/x-www-form-urlencoded',
+          
+         },
+       }
+        
+        )
+     
+ 
         toast.success("Login successful!", {
           position: "top-right",
           autoClose: 5000, // milliseconds
@@ -24,18 +37,12 @@ export default function Login() {
           closeOnClick: true,
           pauseOnHover: true,
         });
-      } else {
-        toast.success("Wrong username or password!", {
-          position: "top-right",
-          autoClose: 5000, // milliseconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      }
-
-      setResponse({ ...response });
-      console.log(response);
+       
+      setUserSessionDetails(response.data);
+      setUsername("");
+      setPassword("");
+      navigate("/Mentor")
+      
     } catch (e) {
       toast.error("Login failed. Please try again.", {
         position: "top-right",
@@ -46,8 +53,7 @@ export default function Login() {
       });
       console.error("Error during login: ", e);
     }
-    setUsername("");
-    setPassword("");
+;
   };
 
   return (

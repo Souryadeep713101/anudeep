@@ -1,18 +1,21 @@
-import React from 'react'
-import {Link, Outlet} from "react-router-dom"
+import React, { useContext }    from 'react'
+import {Link, Outlet  , Navigate} from "react-router-dom"
 import { Navbar , Footer } from 'flowbite-react'
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
+import UserContext from '../Context/UserContext';
+export default function Landing() {
+const  {loggedIn} = useContext(UserContext)
 
-export default function Home() {
-  return (
-   <>
-    <Navbar
+
+console.log(loggedIn)
+    
+  return loggedIn ? (<Navigate to="/Mentor" />) : (<>  <Navbar
     fluid={true}
     rounded={true}
     className= "bg-lime-200 shadow-xl relative z[1]"
    >
     <Navbar.Brand>
-       <img width="130" height="200"
+       <img width="100" height="200"
         src="https://www.anudip.org/wp-content/uploads/2018/07/logow.png"
        
         alt="Anudip Logo"
@@ -27,7 +30,7 @@ export default function Home() {
       
         
       >
-        <Link to="/">Programme View</Link>
+        <Link to="/">Signup</Link>
       </Navbar.Link>
   
       <Navbar.Link
@@ -36,27 +39,10 @@ export default function Home() {
        >
          <Link to="/login">Login</Link>
        </Navbar.Link>
-   
-       <Navbar.Link
-       
-        
-       >
+ 
   
     
   
-  
-         <Link to="/MentorCommitment">MentorCommitment</Link>
-       </Navbar.Link>
-       <Navbar.Link
-       
-        
-       >
-  
-    
-  
-  
-         <Link to="/ApproveMentor">Approve Mentors</Link>
-       </Navbar.Link>
   
        <Navbar.Link
        
@@ -66,7 +52,7 @@ export default function Home() {
     
   
   
-         <Link to="/about">About</Link>
+         <Link to="/About">About</Link>
        </Navbar.Link>
   
   
@@ -98,7 +84,6 @@ export default function Home() {
     
 
     </footer>
-   
-  </>
-  )
+  </>)
+    
 }
