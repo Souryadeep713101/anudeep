@@ -5,6 +5,7 @@ import Login from "./Components/Login";
 import About from "./Components/About";
 import MentorCommitment from "./Components/MentorCommitment";
 import Approvals from "./Components/Approvals";
+import SessionPlan from "./Components/SessionPlan";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContextProvider } from "./Context/UserContext";
@@ -16,6 +17,7 @@ import CommitmentCalendar from "./Components/CommitmentCalendar";
 
 
 
+import StudentDetails from "./Components/StudentDetails";
 function App() {
 
   return (
@@ -39,6 +41,8 @@ function App() {
         <Route path='/Mentor/CommitmentCalendar '  element={<CommitmentCalendar/>}/> 
         <Route path='/Mentor/ApproveMentor'  element={<Approvals/>}/> 
         <Route path='/Mentor/About'  element={<About/>}/> 
+        <Route path='/sessionPlan'  element={<SessionPlan />}/> 
+        <Route path='/studentDetails'  element={<StudentDetails />}/> 
         </Route>
               
   </Routes> 
