@@ -4,12 +4,10 @@ import { useContext } from 'react'
 import UserContext from '../Context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
-
 export default function UserAvatarButton() {
   
   const {userDetails , logOutUser} = useContext(UserContext)
-  console.log(userDetails.userDetails)
+
   const {user_id , email , user_image} = userDetails.userDetails; 
   const navigate = useNavigate();
 

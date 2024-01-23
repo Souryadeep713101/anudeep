@@ -2,13 +2,9 @@ import React    from 'react'
 import {Link, Outlet } from "react-router-dom"
 import { Navbar , Footer } from 'flowbite-react'
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
-import UserContext from '../Context/UserContext';
 import UserAvatarButton from './UserAvatarButton';
-export default function Mentor() {
-
-  console.log("Mentor")
-  return (
-   <>
+export default function CentreManager() {
+   return  <>
     <Navbar
     fluid={true}
     rounded={true}
@@ -25,40 +21,25 @@ export default function Mentor() {
     <Navbar.Toggle />
     <Navbar.Collapse  className='[&>*]:items-center'>
      
-     
-
-    <Navbar.Link>
-
-<Link to="/Mentor">Programmes</Link>
- </Navbar.Link>
-
+    
 
       <Navbar.Link>
 
-      <Link to="MentorCommitment">MentorCommitment</Link>
+      <Link to="/CentreManager">Availble Mentor</Link>
        </Navbar.Link>
 
 
 
        <Navbar.Link>
   
-       <Link to="CommitmentCalendar">Commitment Calendar</Link>
+       <Link to="BookedMentor">Booked Mentor</Link>
        </Navbar.Link>
 
 
 
-       <Navbar.Link>
-  
-  
-         <Link to="SessionPlan">Session Plan</Link>
-       </Navbar.Link>
   
        <Navbar.Link>
-  
-    
-  
-  
-         <Link to="About">About</Link>
+       <Link to="About">About</Link>
        </Navbar.Link>
       
       <li><UserAvatarButton /></li>
@@ -95,5 +76,5 @@ export default function Mentor() {
     </footer>
    
   </>
-  )
+
 }
