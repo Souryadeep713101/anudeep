@@ -1,24 +1,23 @@
 import { BrowserRouter , Routes  ,  Route } from "react-router-dom"
-import Mentor from "./Components/Mentor";
-import ProgrammeView from "./Components/ProgrammeView";
-import Login from "./Components/Login";
+import Mentor from "./Components/MentorComponents/Mentor";
+import ProgrammeView from "./Components/MentorComponents/ProgrammeView";
+import Login from "./Components/LandingComponents/Login";
 import About from "./Components/About";
-import MentorCommitment from "./Components/MentorCommitment";
+import MentorCommitment from "./Components/MentorComponents/MentorCommitment";
 import Approvals from "./Components/Approvals";
-import SessionPlan from "./Components/SessionPlan";
+import SessionPlan from "./Components/MentorComponents/SessionPlan";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContextProvider } from "./Context/UserContext";
-import Landing from "./Components/Landing";
-import SignUp from "./Components/SignUp";
+import Landing from "./Components/LandingComponents/Landing";
+import SignUp from "./Components/LandingComponents/SignUp";
 import { ProgrammeContextProvider } from "./Context/PorgrammeContext";
-import Student from "./Components/Student";
-import CommitmentCalendar from "./Components/CommitmentCalendar";
-import AvailableMentor from "./Components/AvailableMentor";
-import BookedMentor from "./Components/BookedMentor";
-
+import Student from "./Components/StudentComponents/Student";
+import CommitmentCalendar from "./Components/MentorComponents/CommitmentCalendar";
+import AvailableMentor from "./Components/CentreManagerComponents/AvailableMentor";
+import BookedMentor from "./Components/CentreManagerComponents/BookedMentor";
 import StudentDetails from "./Components/StudentDetails";
-import CentreManager from "./Components/CentreManager";
+import CentreManager from "./Components/CentreManagerComponents/CentreManager";
 function App() {
 
   return (

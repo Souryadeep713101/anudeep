@@ -2,7 +2,7 @@ import React    from 'react'
 import {Link, Outlet } from "react-router-dom"
 import { Navbar , Footer } from 'flowbite-react'
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
-import UserAvatarButton from './UserAvatarButton';
+import UserAvatarButton from '../UserAvatarButton';
 function Student() {
   return    <>
   <Navbar

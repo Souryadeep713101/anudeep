@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import SignUp from './SignUp'
+import SignUp from '../LandingComponents/SignUp'
 import { useNavigate } from 'react-router-dom';
 import { toast , Bounce} from 'react-toastify';
-import ProgrammeContext from '../Context/PorgrammeContext';
+import ProgrammeContext from '../../Context/PorgrammeContext';
 import MentorCommitment from './MentorCommitment';
 
 

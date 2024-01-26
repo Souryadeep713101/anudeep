@@ -2,7 +2,7 @@ import React, { useState , useContext } from "react";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import UserContext from "../Context/UserContext";
+import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const anudeepLoginURL =  process.env.REACT_APP_ANUDEEP_LOGIN;
@@ -29,7 +29,7 @@ export default function Login() {
         
         )
      
- 
+      console.log(response)
         toast.success("Login successful!", {
           position: "top-right",
           autoClose: 5000, // milliseconds

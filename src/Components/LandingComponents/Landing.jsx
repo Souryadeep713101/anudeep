@@ -1,15 +1,15 @@
-import React    from 'react'
-import {Link, Outlet } from "react-router-dom"
+import React, { useContext }    from 'react'
+import {Link, Outlet  , Navigate} from "react-router-dom"
 import { Navbar , Footer } from 'flowbite-react'
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
-import UserContext from '../Context/UserContext';
-import UserAvatarButton from './UserAvatarButton';
-export default function Mentor() {
+import UserContext from '../../Context/UserContext';
+export default function Landing() {
+const  {loggedIn} = useContext(UserContext)
 
-  console.log("Mentor")
-  return (
-   <>
-    <Navbar
+
+console.log(loggedIn)
+    
+  return loggedIn ? (<Navigate to="/Mentor" />) : (<>  <Navbar
     fluid={true}
     rounded={true}
     className= "bg-lime-200 shadow-xl relative z[1]"
@@ -23,52 +23,43 @@ export default function Mentor() {
       
     </Navbar.Brand>
     <Navbar.Toggle />
-    <Navbar.Collapse  className='[&>*]:items-center'>
+    <Navbar.Collapse>
      
      
-
-    <Navbar.Link>
-
-<Link to="/Mentor">Programmes</Link>
- </Navbar.Link>
-
-
-      <Navbar.Link>
-
-      <Link to="MentorCommitment">MentorCommitment</Link>
+      <Navbar.Link
+      
+        
+      >
+        <Link to="/">Signup</Link>
+      </Navbar.Link>
+  
+      <Navbar.Link
+       
+        
+       >
+         <Link to="/login">Login</Link>
        </Navbar.Link>
-
-
-
-       <Navbar.Link>
-  
-       <Link to="CommitmentCalendar">Commitment Calendar</Link>
-       </Navbar.Link>
-
-
-
-       <Navbar.Link>
-  
-  
-         <Link to="SessionPlan">Session Plan</Link>
-       </Navbar.Link>
-  
-       <Navbar.Link>
+ 
   
     
   
   
-         <Link to="About">About</Link>
-       </Navbar.Link>
-      
-      <li><UserAvatarButton /></li>
+       <Navbar.Link
        
+        
+       >
+  
+    
+  
+  
+         <Link to="/About">About</Link>
+       </Navbar.Link>
+  
+  
   
     </Navbar.Collapse>
-
-    
   </Navbar>
-  
+    
     
       
       <div className='grow p-10 mid-container'>
@@ -93,7 +84,6 @@ export default function Mentor() {
     
 
     </footer>
-   
-  </>
-  )
+  </>)
+    
 }

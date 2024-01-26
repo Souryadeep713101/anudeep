@@ -5,9 +5,10 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: cursive;
+  font-family: Helvetica;
+
 }
-#root {
+  #root {
   height: 100vh;
   width: 100vw;
   display: flex;

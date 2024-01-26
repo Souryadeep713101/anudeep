@@ -3,7 +3,7 @@ import { Datepicker } from 'flowbite-react';
 import CommitmentCalendar from './CommitmentCalendar';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import ProgrammeContext from '../Context/PorgrammeContext';
+import ProgrammeContext from '../../Context/PorgrammeContext';
 
 export default function MentorCommitment() {
 

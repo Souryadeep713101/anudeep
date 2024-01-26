@@ -1,15 +1,15 @@
-import React, { useContext }    from 'react'
-import {Link, Outlet  , Navigate} from "react-router-dom"
+import React    from 'react'
+import {Link, Outlet } from "react-router-dom"
 import { Navbar , Footer } from 'flowbite-react'
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
-import UserContext from '../Context/UserContext';
-export default function Landing() {
-const  {loggedIn} = useContext(UserContext)
+import UserContext from '../../Context/UserContext';
+import UserAvatarButton from '../UserAvatarButton';
+export default function Mentor() {
 
-
-console.log(loggedIn)
-    
-  return loggedIn ? (<Navigate to="/Mentor" />) : (<>  <Navbar
+  console.log("Mentor")
+  return (
+   <>
+    <Navbar
     fluid={true}
     rounded={true}
     className= "bg-lime-200 shadow-xl relative z[1]"
@@ -23,43 +23,52 @@ console.log(loggedIn)
       
     </Navbar.Brand>
     <Navbar.Toggle />
-    <Navbar.Collapse>
+    <Navbar.Collapse  className='[&>*]:items-center'>
      
      
-      <Navbar.Link
+
+    <Navbar.Link>
+
+<Link to="/Mentor">Programmes</Link>
+ </Navbar.Link>
+
+
+      <Navbar.Link>
+
+      <Link to="MentorCommitment">MentorCommitment</Link>
+       </Navbar.Link>
+
+
+
+       <Navbar.Link>
+  
+       <Link to="CommitmentCalendar">Commitment Calendar</Link>
+       </Navbar.Link>
+
+
+
+       <Navbar.Link>
+  
+  
+         <Link to="SessionPlan">Session Plan</Link>
+       </Navbar.Link>
+  
+       <Navbar.Link>
+  
+    
+  
+  
+         <Link to="About">About</Link>
+       </Navbar.Link>
       
-        
-      >
-        <Link to="/">Signup</Link>
-      </Navbar.Link>
-  
-      <Navbar.Link
+      <li><UserAvatarButton /></li>
        
-        
-       >
-         <Link to="/login">Login</Link>
-       </Navbar.Link>
- 
-  
-    
-  
-  
-       <Navbar.Link
-       
-        
-       >
-  
-    
-  
-  
-         <Link to="/About">About</Link>
-       </Navbar.Link>
-  
-  
   
     </Navbar.Collapse>
-  </Navbar>
+
     
+  </Navbar>
+  
     
       
       <div className='grow p-10 mid-container'>
@@ -84,6 +93,7 @@ console.log(loggedIn)
     
 
     </footer>
-  </>)
-    
+   
+  </>
+  )
 }
