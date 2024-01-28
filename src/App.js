@@ -56,7 +56,7 @@ function App() {
       <Route  path="/CentreManager"  element = {<CentreManager/>}>
          <Route index  element={<AvailableMentor/>}/> 
          <Route path='/CentreManager/BookedMentor'  element={<BookedMentor/>}/>
-         <Route path='CentreManager/About'  element={<About/>}/> 
+         <Route path='/CentreManager/About'  element={<About/>}/> 
       </Route>  
   </Routes> 
   <ToastContainer/>

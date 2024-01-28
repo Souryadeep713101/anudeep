@@ -46,8 +46,8 @@ export default function AvailableMentor() {
 
     
 
-    const students = []
-  return  ( <><Accordion className='shadow-lg'>
+  const students = ["Souryadeep Das" , "Anshuman Gupta" , "Debasish Mallick" , "Allankriti Mallick"]
+  return  ( <><div className="flex justify-center"><h1 class="text-3xl text-blue-400 mb-4 font-extrabold">Available Mentor</h1></div><Accordion className='shadow-lg'>
     {mentors.map((mentor)=>{
         return <Accordion.Panel>
         <Accordion.Title>{mentor.name} -  {mentor.subject}</Accordion.Title>
@@ -69,23 +69,26 @@ export default function AvailableMentor() {
 <Modal show={openModal} size="md" onClose={onCloseModal} popup>
         <Modal.Header/>
         <Modal.Body className='h-full'>
-         <Accordion >
-       
-          <Accordion.Panel>
+        <Accordion >
+        <Accordion.Panel>
           <Accordion.Title>Student Batch</Accordion.Title>
-          <Accordion.Content>  
-          <div className="flex items-center gap-2">    
+          <Accordion.Content> 
+        { students.map((student) => {
+          return<div className="flex items-center gap-2">    
         <Checkbox id="accept" defaultChecked />
         <Label htmlFor="accept" className="flex">
-          Souryadeep Das
+          {student}
         </Label>
         </div>
-      </Accordion.Content>
+    
+          
+        
+         })}
+           </Accordion.Content>
           </Accordion.Panel>
      
-          </Accordion>
-        
-          <div className="flex justify-end m-2"><Button>Submit</Button></div>
+         </Accordion>
+          <div className="flex justify-end m-2"><Button type='Submit'>Submit</Button></div>
         
           </Modal.Body> 
       </Modal>
