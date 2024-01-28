@@ -64,7 +64,7 @@ catch(e) {
 
 <div className='input-container'>
 <label htmlFor="selectedProgramme" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Programme</label>
-<select   name="selectedProgramme" onChange = {onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+<select   name="selectedProgramme" onInput = {onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 <option value="" disabled selected hidden>Select Programme</option>
  {programmeNames.map(programme=>{
     return  <option value={programme}>{programme}</option>
@@ -73,7 +73,7 @@ catch(e) {
 </select>
 </div>
 <div className='input-container'><label htmlFor="programmeTenure" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programme Tenure(in months)</label>
-<input defaultValue="1" min="1" onChange = {onChange}  type="number" required name="programmeTenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
+<input defaultValue="1" min="1" onInput = {onChange}  type="number" required name="programmeTenure" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
 
 
 </div>
@@ -90,7 +90,7 @@ onSelectedDateChanged={(date)=>{
   <div className="mb-4 md:mb-0">
     <label htmlFor="timeStart" className="block text-sm font-medium text-gray-700">Start Time</label>
     <input
-      onChange={onChange}
+      onInput={onChange}
       required
       type="time"
       id="time-input"
@@ -101,7 +101,7 @@ onSelectedDateChanged={(date)=>{
   <div className="md:ml-4">
     <label htmlFor="time-input" className="block text-sm font-medium text-gray-700">End Time</label>
     <input
-      onChange={onChange}
+      onInput={onChange}
       required
       type="time"
       id="time-input-end"

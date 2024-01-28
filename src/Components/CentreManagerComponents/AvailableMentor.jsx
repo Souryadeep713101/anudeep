@@ -1,12 +1,22 @@
 import React , {useState} from 'react'
-import { Accordion } from 'flowbite-react';
+import { Accordion,AccordionContent,Button , Modal } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import { Checkbox, Label} from 'flowbite-react';
+
 
 export default function AvailableMentor() {
   const navigate  = useNavigate()
+  const [openModal, setOpenModal] = useState(false);
+  const [email, setEmail] = useState('');
+
+  function onCloseModal() {
+    setOpenModal(false);
+    setEmail('');
+  }
     const mentors = [
       {
-        name: 'Mentor 1',
+        name: 'Debkumar Das',
+        subject : "Advanced Java",
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         days: ['Monday', 'Wednesday', 'Friday'],
@@ -14,7 +24,8 @@ export default function AvailableMentor() {
         endTime: '16:00',
       },
       {
-        name: 'Mentor 2',
+        name: 'Bipasha Chatterjee',
+        subject : "Advanced Python",
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         days: ['Monday', 'Wednesday', 'Friday'],
@@ -22,7 +33,8 @@ export default function AvailableMentor() {
         endTime: '16:00',
       },
       {
-        name: 'Mentor 3',
+        name: 'Nilanjan Byabrata',
+        subject : "Advanced C#",
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         days: ['Monday', 'Wednesday', 'Friday'],
@@ -31,17 +43,22 @@ export default function AvailableMentor() {
       }
       // Add more mentors as needed
     ];
-  return  ( <Accordion>
+
+    
+
+    const students = []
+  return  ( <><Accordion className='shadow-lg'>
     {mentors.map((mentor)=>{
         return <Accordion.Panel>
-        <Accordion.Title>{mentor.name}</Accordion.Title>
+        <Accordion.Title>{mentor.name} -  {mentor.subject}</Accordion.Title>
         <Accordion.Content className='place-content-between'>
-         <div className="flex justify-between md:text-large"><div>StartDate : {mentor.startDate}</div><div>End Date: {mentor.endDate}</div></div>
+         <div className="flex justify-between md:text-large"><div><span className='text-green-600 text-lg font-bold'>Start Date</span> : <span className='text-xs font-extrabold text-red-500'>{mentor.startDate}</span></div><div><span className='text-green-600 text-lg font-bold'>End Date :</span> <span className='text-xs font-extrabold text-red-500'>{mentor.endDate}</span></div></div>
          {mentor.days.map((day)=>{
-            return <div>{day} : {mentor.startTime} - {mentor.endTime}</div>
+            return <div><span className='text-green-600 text-lg font-bold'>{day}  : </span>  <span className='text-xs font-extrabold text-red-500'>{mentor.startTime} - {mentor.endTime}</span></div>
          })}
          
-         <div className="flex justify-end"><button onClick={()=>{navigate("/")}}type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Assign Student</button></div>
+      <div className="flex justify-end"><Button onClick={() => setOpenModal(true)}>Assign Student</Button></div>
+      
          
         </Accordion.Content>
       </Accordion.Panel>
@@ -49,7 +66,30 @@ export default function AvailableMentor() {
   
 }
 </Accordion>
-   
+<Modal show={openModal} size="md" onClose={onCloseModal} popup>
+        <Modal.Header/>
+        <Modal.Body className='h-full'>
+         <Accordion >
+       
+          <Accordion.Panel>
+          <Accordion.Title>Student Batch</Accordion.Title>
+          <Accordion.Content>  
+          <div className="flex items-center gap-2">    
+        <Checkbox id="accept" defaultChecked />
+        <Label htmlFor="accept" className="flex">
+          Souryadeep Das
+        </Label>
+        </div>
+      </Accordion.Content>
+          </Accordion.Panel>
+     
+          </Accordion>
+        
+          <div className="flex justify-end m-2"><Button>Submit</Button></div>
+        
+          </Modal.Body> 
+      </Modal>
+</>
 );
 }
 

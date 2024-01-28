@@ -81,7 +81,7 @@ export default function Login() {
               id="username"
               className="form-input bg-[rgba(255,255,255,0.3)] border-2 border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-gray-400 focus:outline-none focus:outline-0 focus:border-teal-400 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark dark:focus:outline-none dark:focus:outline-0 dark:focus:border-teal-400 dark:focus:border-2 duration-200 focus:shadow-inner"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onInput={(e) => setUsername(e.target.value)}
               placeholder="your-name"
               required
             />
@@ -98,7 +98,7 @@ export default function Login() {
               id="password"
               className="form-input bg-[rgba(255,255,255,0.3)] border-2 border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-gray-400 focus:outline-none focus:border-teal-400 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark dark:focus:outline-none dark:focus:outline-0 dark:focus:border-teal-400 dark:focus:border-2 duration-200 focus:shadow-inner"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onInput={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
             />

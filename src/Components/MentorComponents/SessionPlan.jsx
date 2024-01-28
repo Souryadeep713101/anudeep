@@ -24,7 +24,7 @@ export default function SessionPlan() {
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 rounded-md border-gray-300 appearance-none focus:outline-none focus:ring-0 hover:border-teal-400 focus:border-teal-400 peer"
               placeholder=" "
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onInput={(e) => setTitle(e.target.value)}
               required
             />
             <label
@@ -42,7 +42,7 @@ export default function SessionPlan() {
               class="block py-2.5 px-0 w-full h-24 resize-none text-sm text-gray-900 bg-transparent border-0 border-b-2 rounded-md border-gray-300 appearance-none focus:outline-none focus:ring-0 hover:border-teal-400 focus:border-teal-400 peer"
               placeholder=" "
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onInput={(e) => setDescription(e.target.value)}
               required
             />
             <label
@@ -60,7 +60,7 @@ export default function SessionPlan() {
               class="block py-2.5 px-0 w-full h-24 resize-none text-sm text-gray-900 bg-transparent border-0 border-b-2 rounded-md border-gray-300 appearance-none focus:outline-none focus:ring-0 hover:border-teal-400 focus:border-teal-400 peer"
               placeholder=" "
               value={summary}
-              onChange={(e) => setSummary(e.target.value)}
+              onInput={(e) => setSummary(e.target.value)}
               required
             />
             <label
