@@ -33,7 +33,16 @@ function Student() {
 
     <Link to="/Student">Availble Mentor</Link>
      </Navbar.Link>
-
+     <Navbar.Link
+       
+        
+       >
+  
+    
+  
+  
+         <Link to="StudentAspiration">Student Aspiration</Link>
+       </Navbar.Link>
 
 
      <Navbar.Link>
