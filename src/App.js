@@ -18,6 +18,8 @@ import AvailableMentor from "./Components/CentreManagerComponents/AvailableMento
 import BookedMentor from "./Components/CentreManagerComponents/BookedMentor";
 import StudentDetails from "./Components/StudentDetails";
 import CentreManager from "./Components/CentreManagerComponents/CentreManager";
+import AvailableSessions from "./Components/StudentComponents/AvailableSessions";
+import RateSessions from "./Components/StudentComponents/RateSessions";
 function App() {
 
   return (
@@ -31,8 +33,7 @@ function App() {
          <Route  path="/"  element = {<Landing/>}>
          <Route index  element={<SignUp/>}/> 
          <Route path='/login'  element={<Login/>}/>
-         <Route path='/About'  element={<About/>}/> 
-         
+         <Route path='/About'  element={<About/>}/>          
          </Route>
        {/* Mentor */}
         <Route path="/Mentor" element={<Mentor/>}>
