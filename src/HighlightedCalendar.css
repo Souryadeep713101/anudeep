@@ -1,16 +1,18 @@
 .cal-container {
   
     margin: 1rem auto;
-   
+       
     
   }
   
   .cal-header {
-    background-color: #4f46e5;
-    color: white;
+    background-color: #6ac123;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 1rem;
+    font-weight: bolder;
     font-size: 1.25rem;
+    border: 1px solid rgb(179, 0, 255); 
     
   }
   
@@ -22,21 +24,29 @@
   }
   
   .highlighted-date {
-    border: 1px solid black !important;
-    background-color: #e8151c;
+    border: 2.5px solid rgb(115, 78, 188) !important;
+    background-color: #a0b72d;
+    border-radius: 20px;
     color: white;
+    padding: 1.5rem 0;
+    z-index: 2;
+    
   }
   
   .highlighted-content {
     font-size: 0.8rem;
-    color: rgb(5, 247, 5);
+    color: darkgreen;
+    font-weight: bolder;
   }
 
   .react-calendar {
     width: 100%;
     min-width: min-content;
     min-height: min-content;
-    border-radius: 1%;
+    border-radius: 5px;
     background-color:  #f3f3f3;  /* Set your desired background color */
-    border: 1px solid #ccc;  /* Add a border for better visibility */
-  }
+    border: 3px solid red;  /* Add a border for better visibility */
+  
+    padding: 1.5rem;
+
+     }

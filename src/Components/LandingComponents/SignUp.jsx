@@ -60,7 +60,7 @@ export default function SignUp(){
         <>
             <div className="flex flex-row">
                
-                
+            <img  className="hidden md:flex" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/authentication/illustration.svg" alt="illustration"/>
                 <form  onSubmit={handleFormSubmission} className="z-2 grow min-w-md  border-2   p-16  rounded-lg shadow-2xl">
            
     <TypeAnimation
@@ -120,7 +120,7 @@ export default function SignUp(){
     
     </form>
          
-            <img  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/authentication/illustration.svg" alt="illustration"/>
+            
             </div>
         </>
     )

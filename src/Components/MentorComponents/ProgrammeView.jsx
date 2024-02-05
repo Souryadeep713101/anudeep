@@ -39,7 +39,7 @@ export default function ProgrammeView() {
 
 
   return <>
-    <div className='mx-auto  border border-blue-700 rounded-lg shadow-xl m-2 p-4 justify-center'>ProgrammeView
+    <div className='mx-auto  border rounded-lg shadow-2xl m-2 p-4 justify-center'>ProgrammeView
 
       <div className="flex flex-col space-y-10  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
       

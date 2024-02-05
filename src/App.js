@@ -49,7 +49,9 @@ function App() {
         {/* Student */}
 
         <Route  path="/Student"  element = {<Student/>}>
-          <Route path='Student/About'  element={<About/>}/> 
+          <Route path='/Student/About'  element={<About/>}/> 
+          <Route path='/Student/AvailableSessions'  element={<AvailableSessions/>}/> 
+          <Route path='/Student/RateSessions'  element={<RateSessions/>}/> 
          </Route>
 
       {/* CentreManager   */}

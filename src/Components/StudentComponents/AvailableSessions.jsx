@@ -5,8 +5,8 @@ const AvailableSessions = () => {
     const navigate = useNavigate();
     const handleRatingSession = ()=>{
         // Check if session is completed then go for rating the session
-        alert("rated sessions");
-        navigate('/rateSession')
+      
+        navigate('/Student/RateSessions')
         // Else Say Please Complete the session
     }
   return (
