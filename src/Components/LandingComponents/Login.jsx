@@ -41,7 +41,25 @@ export default function Login() {
       setUserSessionDetails(response.data);
       setUsername("");
       setPassword("");
-      navigate("/Mentor")
+      const userType = response.data.userDetails.role_name;
+      console.log(userType)
+      if(userType === "mne"){
+        navigate('/Approver')
+      }
+      else if(userType === "Centre Manager"){
+        navigate("/CentreManager")
+      }
+      else if(userType === "student"){
+        navigate("/Student")
+      }
+      else if(userType === "trainer"){
+        navigate("/Mentor")
+      }
+      else{
+        navigate("/login")
+      }
+
+      
       
     } catch (e) {
       toast.error("Login failed. Please try again.", {
@@ -51,7 +69,8 @@ export default function Login() {
         closeOnClick: true,
         pauseOnHover: true,
       });
-      console.error("Error during login: ", e);
+      
+      navigate("/login")
     }
 ;
   };

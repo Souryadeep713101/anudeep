@@ -1,7 +1,7 @@
 import React    from 'react'
 import {Link, Outlet } from "react-router-dom"
-import { Navbar , Footer } from 'flowbite-react'
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
+import { Navbar } from 'flowbite-react'
+import Footer from '../AnudipFooter';
 import UserAvatarButton from '../UserAvatarButton';
 function Student() {
   return    <>
@@ -23,15 +23,12 @@ function Student() {
    
    
 
-  <Navbar.Link>
 
-<Link to="/Mentor">Programmes</Link>
-</Navbar.Link>
 
 
     <Navbar.Link>
 
-    <Link to="/Student">Availble Mentor</Link>
+    <Link to="/Student/AvailableSessions">Availble Sessions</Link>
      </Navbar.Link>
      <Navbar.Link
        
@@ -45,11 +42,7 @@ function Student() {
        </Navbar.Link>
 
 
-     <Navbar.Link>
-
-     <Link to="BookedMentor">Booked Mentor</Link>
-     </Navbar.Link>
-
+   
 
 
 
@@ -72,23 +65,7 @@ function Student() {
     </div>
 
 
-  <footer  className="flex justify-around p-10 bg-lime-200 shadow-xl">
-    
-    <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-          
-          <Footer.Icon href="#" icon={BsFacebook} />
-          <Footer.Icon href="#" icon={BsInstagram} />
-          <Footer.Icon href="#" icon={BsTwitter} />
-          <Footer.Icon href="#" icon={BsGithub} />
-          <Footer.Icon href="#" icon={BsDribbble} />
-    
- 
-  </div>
-
-
-  
-
-  </footer>
+<Footer />
  
 </>
 }

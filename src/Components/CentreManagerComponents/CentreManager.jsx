@@ -1,7 +1,7 @@
 import React    from 'react'
 import {Link, Outlet } from "react-router-dom"
-import { Navbar , Footer } from 'flowbite-react'
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
+import { Navbar} from 'flowbite-react'
+import Footer from '../AnudipFooter';
 import UserAvatarButton from '../UserAvatarButton';
 export default function CentreManager() {
    return  <>
@@ -57,22 +57,7 @@ export default function CentreManager() {
       </div>
 
 
-    <footer  className="flex justify-around p-10 bg-lime-200 shadow-xl">
-      
-      <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            
-            <Footer.Icon href="#" icon={BsFacebook} />
-            <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-         
-      
-   
-    </div>
-
-
-    
-
-    </footer>
+   <Footer/>
    
   </>
 

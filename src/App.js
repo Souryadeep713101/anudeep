@@ -20,12 +20,14 @@ import StudentDetails from "./Components/StudentDetails";
 import CentreManager from "./Components/CentreManagerComponents/CentreManager";
 import AvailableSessions from "./Components/StudentComponents/AvailableSessions";
 import RateSessions from "./Components/StudentComponents/RateSessions";
+import Approver from "./Components/ApproverComponents/Approver";
+import StudentAspiration from "./Components/StudentComponents/StudentAspiration";
 function App() {
 
   return (
    <>
    <UserContextProvider>
-    <ProgrammeContextProvider>
+    
    <BrowserRouter>
 
    <Routes>  
@@ -36,20 +38,24 @@ function App() {
          <Route path='/About'  element={<About/>}/>          
          </Route>
        {/* Mentor */}
-        <Route path="/Mentor" element={<Mentor/>}>
+      
+        <Route path="/Mentor" element={<ProgrammeContextProvider><Mentor/></ProgrammeContextProvider>}>
+      
         <Route index  element={<ProgrammeView/>}/>
         <Route path="/Mentor/MentorCommitment" element={<MentorCommitment/>}/> 
         <Route path='/Mentor/CommitmentCalendar'  element={<CommitmentCalendar/>}/> 
         <Route path='/Mentor/SessionPlan'  element={<SessionPlan/>}/> 
         <Route path='/Mentor/ApproveMentor'  element={<Approvals/>}/> 
         <Route path='/Mentor/About'  element={<About/>}/> 
+     
         </Route>
-
+        
 
         {/* Student */}
 
         <Route  path="/Student"  element = {<Student/>}>
-          <Route path='/Student/About'  element={<About/>}/> 
+          <Route path='/Student/About'  element={<About/>}/>
+          <Route path='/Student/StudentAspiration'  element={<StudentAspiration/>}/>  
           <Route path='/Student/AvailableSessions'  element={<AvailableSessions/>}/> 
           <Route path='/Student/RateSessions'  element={<RateSessions/>}/> 
          </Route>
@@ -61,10 +67,21 @@ function App() {
          <Route path='/CentreManager/BookedMentor'  element={<BookedMentor/>}/>
          <Route path='/CentreManager/About'  element={<About/>}/> 
       </Route>  
+
+
+
+                   {/* Approver */}
+  <Route  path="/Approver"  element = {<Approver/>}>
+         <Route index  element={<Approvals/>}/> 
+         <Route path='/Approver/About'  element={<About/>}/> 
+  </Route>  
+
+
+ 
   </Routes> 
   <ToastContainer/>
   </BrowserRouter>
-  </ProgrammeContextProvider>
+ 
   </UserContextProvider>
    </>
   );

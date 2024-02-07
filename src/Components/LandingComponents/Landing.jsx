@@ -1,15 +1,15 @@
 import React, { useContext }    from 'react'
 import {Link, Outlet  , Navigate} from "react-router-dom"
-import { Navbar , Footer } from 'flowbite-react'
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
+import { Navbar} from 'flowbite-react'
+import Footer from '../AnudipFooter';
 import UserContext from '../../Context/UserContext';
 export default function Landing() {
-const  {loggedIn} = useContext(UserContext)
-
+const  {loggedIn ,userDetails} = useContext(UserContext)
+const userType = userDetails?.userDetails?.role_name;
 
 console.log(loggedIn)
     
-  return loggedIn ? (<Navigate to="/Mentor" />) : (<>  <Navbar
+  return loggedIn && userType!=null ? userType==="trainer"?(<Navigate to="/Mentor" />) :userType==="mne" ?(<Navigate to="/Approver" />) : userType==="student" ?(<Navigate to="/Student" />) : userType ==="Centre Manager" ? (<Navigate to="/CentreManager" />) : (<Navigate to="/login" />)   : (<>  <Navbar
     fluid={true}
     rounded={true}
     className= "bg-lime-200 shadow-xl relative z[1]"
@@ -67,22 +67,7 @@ console.log(loggedIn)
       </div>
 
 
-    <footer  className="flex justify-around p-10 bg-lime-200 shadow-xl">
-      
-      <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            
-            <Footer.Icon href="#" icon={BsFacebook} />
-            <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-         
-      
-   
-    </div>
-
-
-    
-
-    </footer>
+ <Footer/>
   </>)
     
 }
