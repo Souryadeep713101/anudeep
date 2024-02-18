@@ -76,7 +76,7 @@ function App() {
          <Route path='/Approver/About'  element={<About/>}/> 
   </Route>  
 
-
+ <Route path="/Error/500"  element = {<><h1>Internal Server Error</h1></>} />
  
   </Routes> 
   <ToastContainer/>

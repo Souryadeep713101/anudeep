@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TypeAnimation } from 'react-type-animation';
 import { Label , FileInput ,Button } from "flowbite-react";
 import { toast } from "react-toastify";
-import qs from  "qs"
+
 import axios from "axios";
 export default function SignUp(){
     
@@ -12,7 +12,7 @@ export default function SignUp(){
         
         if(e.target.name==="fileUpload") {
             setFormData((prevFormData)=>{
-                return {...prevFormData , [e.target.name]  : e.target.files[0]}
+                return {...prevFormData , file  : e.target.files[0]}
             })
             return;
         }

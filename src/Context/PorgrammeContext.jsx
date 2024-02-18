@@ -2,6 +2,7 @@ import { createContext ,useContext  , useState  ,useEffect} from "react";
 import axios from "axios";
 import UserContext from "./UserContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const ProgrammeContext = createContext()
@@ -10,7 +11,7 @@ const ProgrammeContext = createContext()
 
 export const ProgrammeContextProvider = ({children})=>{
 
-
+const navigate  =  useNavigate();
 const {userDetails} = useContext(UserContext)
 const anudeepProgrammeURL = process.env.REACT_APP_ANUDEEP_PROGRAMME_DETAILS
 const [programmeDetails , setProgrammeDetails] = useState([])
@@ -40,14 +41,16 @@ const fetchProgrammeDetails = async()=>{
      
         
       } catch (e) {
-        toast.error("Login failed. Please try again.", {
+        
+        toast.error(e.message, {
           position: "top-right",
           autoClose: 3000, // milliseconds
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
         });
-        
+        if(e.response.status === 500) navigate("/Error/500")
+
       }
     }
 
