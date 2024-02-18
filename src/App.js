@@ -35,7 +35,8 @@ function App() {
          <Route  path="/"  element = {<Landing/>}>
          <Route index  element={<SignUp/>}/> 
          <Route path='/login'  element={<Login/>}/>
-         <Route path='/About'  element={<About/>}/>          
+         <Route path='/About'  element={<About/>}/>     
+         <Route path='/StudentDetails'  element={<StudentDetails/>}/>         
          </Route>
        {/* Mentor */}
       
