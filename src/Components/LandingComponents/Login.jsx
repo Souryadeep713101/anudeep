@@ -46,13 +46,13 @@ export default function Login() {
       if(userType === "mne"){
         navigate('/Approver')
       }
-      else if(userType === "Centre Manager"){
+      else if(userType === "Centre Manager" || userType === "trainer"){
         navigate("/CentreManager")
       }
       else if(userType === "student"){
         navigate("/Student")
       }
-      else if(userType === "trainer"){
+      else if(userType === "mentor"){
         navigate("/Mentor")
       }
       else{

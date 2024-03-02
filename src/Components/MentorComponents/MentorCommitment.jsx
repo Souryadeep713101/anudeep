@@ -3,20 +3,55 @@ import { Datepicker } from 'flowbite-react';
 import CommitmentCalendar from './CommitmentCalendar';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import UserContext from '../../Context/UserContext';
 import ProgrammeContext from '../../Context/PorgrammeContext';
+
+function updateTimeInputMin() {
+  const startTimeInput = document.getElementById("time-input");
+  const endTimeInput = document.getElementById("time-input-end");
+
+  // Get the value of the start time input
+  const startTimeValue = startTimeInput.value;
+
+  // Calculate the minimum end time by adding 1 hour to the start time
+  const [startHour, startMinute] = startTimeValue.split(":").map(Number);
+  let endHour = startHour + 1;
+  let endMinute = startMinute;
+
+  // Handle cases where endHour exceeds 24
+  if (endHour >= 24) {
+    endHour -= 24;
+  }
+
+  // Format the minimum end time
+  const minEndTime = `${endHour.toString().padStart(2, "0")}:${endMinute.toString().padStart(2, "0")}`;
+
+  // Set the min attribute of the end time input
+  endTimeInput.setAttribute("min", minEndTime);
+}
+
+
+
+
+
 
 export default function MentorCommitment() {
 
-
+  const mentorCommitmentURL = process.env.REACT_APP_ANUDEEP_MENTOR_COMMITMENT
+  console.log(mentorCommitmentURL)
   const {programmeDetails} = useContext(ProgrammeContext)
-  const [programmeNames , setProgrammeNames] = useState([])
+  const {userDetails} = useContext(UserContext)
+  const [programmeNamesIDs , setProgrammeNamesIDs] = useState([])
   const [selectedDays, setSelectedDays] = useState([]);
   const [formData , setFormData] = useState({})
+  //Fetched Programme Data
   useEffect(()=>{
-    if(programmeDetails.length > 0)setProgrammeNames(programmeDetails.map((programme)=>{return programme.programmeName}))
+    if(programmeDetails.length > 0)setProgrammeNamesIDs(programmeDetails.map((programme)=>{return [programme.programmeName , programme.id ] }))
     
     
     } , [programmeDetails])
+
+  //Toggle Day on clicks  
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
@@ -28,29 +63,55 @@ export default function MentorCommitment() {
 
 
  const onChange = (e)=>{
+
+   
+   
    setFormData((prevFormData)=>{
     return {...prevFormData , [e.target.name]  : e.target.value}
    })
-   if(e.target.name == "timeStart") document.getElementById("time-input-end").setAttribute("min" , e.target.value)  
+   if(e.target.name == "timeStart") updateTimeInputMin(); 
 
  } 
+//Submitted Mentor Commitments 
 const onSubmit = async (e)=>{
 e.preventDefault();
 try{
 
 
- console.log(formData)
+ const {selectedProgramme , programmeTenure ,selectedDays , startDate , timeStart ,timeEnd } = formData;
+ console.log(selectedDays)
+  const data = {program_id : selectedProgramme  , tenure : programmeTenure
+    ,start_date : startDate , start_time : timeStart , end_time : timeEnd  ,day_name : selectedDays};
+   
 
- const response = await axios.post("https://ae731edf-571c-430a-b094-9cce57a25653.mock.pstmn.io/mentor/commit"  , {useId : "souryadeep123" , ...formData } )
- console.log(response.status)
+ 
+
+ const response  = await axios.post(mentorCommitmentURL ,data , 
+  {
+   
+   headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/x-www-form-urlencoded',
+     'Authorization': `Bearer ${userDetails.token}`
+    
+   },
+ })
+console.log(response)
 toast.success('🦄 Commited Successfully');
+
+  
+
+
+
+
 
 e.target.reset()
 setSelectedDays([])
 setFormData({})
 }
 catch(e) {
-
+  console.log(e)
+  toast.error('Commitment Unsuccessfull');
 }
 
 
@@ -58,7 +119,7 @@ catch(e) {
 
 
   return (
-<div className='flex items-center justify-between w-full h-full   flex-col justify-around'>  
+<div className='flex items-center justify-between w-full h-full   flex-col'>  
 <form className='flex flex-col align-center justify-between  min-w-fit w-1/2 p-10  bg-white border border-gray-200 rounded-lg shadow-lg' onSubmit={onSubmit}>
 
 
@@ -66,8 +127,8 @@ catch(e) {
 <label htmlFor="selectedProgramme" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Programme</label>
 <select   name="selectedProgramme" onInput = {onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 <option value="" disabled selected hidden>Select Programme</option>
- {programmeNames.map(programme=>{
-    return  <option value={programme}>{programme}</option>
+ {programmeNamesIDs.map(programme=>{
+    return  <option  key={programme[1]} value={programme[1]}>{programme[0]}</option>
  })}
 
 </select>
@@ -118,7 +179,7 @@ onSelectedDateChanged={(date)=>{
 <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-4">Select Days</h2>
       <div className="flex space-x-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+        {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
           <button
            type='button'
             key={day}
@@ -127,7 +188,7 @@ onSelectedDateChanged={(date)=>{
               selectedDays.includes(day) ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
             }`}
           >
-            {day}
+            {day.substring(0 ,3)}
           </button>
         ))}
       </div>
@@ -145,7 +206,7 @@ onSelectedDateChanged={(date)=>{
 </div>
 
 
-
+<small className='text-red-600 font-bold'>* Time difference between Start Time and End Time should be 1 hour</small>
 
 
 

@@ -9,7 +9,7 @@ const userType = userDetails?.userDetails?.role_name;
 
 console.log(loggedIn)
     
-  return loggedIn && userType!=null ? userType==="trainer"?(<Navigate to="/Mentor" />) :userType==="mne" ?(<Navigate to="/Approver" />) : userType==="student" ?(<Navigate to="/Student" />) : userType ==="Centre Manager" ? (<Navigate to="/CentreManager" />) : (<Navigate to="/login" />)   : (<>  <Navbar
+  return loggedIn && userType!=null ? userType==="mentor"?(<Navigate to="/Mentor" />) :userType==="mne" || userType==="trainer" ?(<Navigate to="/Approver" />) : userType==="student" ?(<Navigate to="/Student" />) : userType ==="Centre Manager" ? (<Navigate to="/CentreManager" />) : (<Navigate to="/login" />)   : (<>  <Navbar
     fluid={true}
     rounded={true}
     className= "bg-lime-200 shadow-xl relative z[1]"

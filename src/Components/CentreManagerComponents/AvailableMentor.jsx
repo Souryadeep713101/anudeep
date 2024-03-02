@@ -1,63 +1,128 @@
-import React , {useState} from 'react'
+import React , {useEffect, useState , useContext} from 'react'
 import { Accordion,AccordionContent,Button , Modal } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
-import { Checkbox, Label} from 'flowbite-react';
+import { Checkbox, Label, Select} from 'flowbite-react';
+import UserContext from '../../Context/UserContext';
+import axios from 'axios';
+import Spinner from '../Spinner';
+import { toast } from 'react-toastify';
 
 
 export default function AvailableMentor() {
-  const navigate  = useNavigate()
+  
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState('');
+  const[batchCodes ,setBatchCodes] = useState([])
+  const [batchCode ,setBatchCode] = useState();
+  const [selectedStudents ,setSelectedStudents] = useState([])
+  const [mentorIdForAssigningStudent ,  steMentorIdForAssigningStudent] = useState();
+  const [availableMentors ,  setAvailableMentors] = useState([])
+  const [students , setStudents]  = useState([])
+  const [loading ,  setLoading] = useState(false);
+  console.log(availableMentors)
+  const getMentorAvailabilityURL = process.env.REACT_APP_ANUDEEP_GET_MENTOR_AVAILABILITY
+  const {userDetails : {token}} = useContext(UserContext)
+   useEffect(()=>{
+    
+  
+    const fetchAvailableMentors = async()=>{
+      if(token!=null) {
+     const {data : {schedule_details}} =  await axios.get(getMentorAvailabilityURL, {
+        headers: {
+          'accept': '*/*',
+          'Authorization': `Bearer ${token}`,
+          'X-CSRF-TOKEN': ''
+        }
+      })
+      setAvailableMentors(schedule_details.filter((mentor)=>{
+        return mentor.students.length == 0;
+      }))
+      
+    }
+    
+    }
+  
+    fetchAvailableMentors();
+   }, [token , getMentorAvailabilityURL])
+
+
+//Fetching Students According to Course Alias
+
+async function fetchStudentsByCourseAlias(e){
+   
+
+  const {data : {students}} = await axios.get(`http://143.110.181.19/mentoring-api/public/api/get-student-by-batch/${e.target.value}`, {
+    headers: {
+      'accept': '*/*',
+      'Authorization': `Bearer ${token}`,
+      'X-CSRF-TOKEN': ''
+    }
+  })
+   setStudents(students)
+   setBatchCode(e.target.value)
+   
+
+}
+
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail('');
+ 
   }
-    const mentors = [
-      {
-        name: 'Debkumar Das',
-        subject : "Advanced Java",
-        startDate: '2024-01-01',
-        endDate: '2024-12-31',
-        days: ['Monday', 'Wednesday', 'Friday'],
-        startTime: '14:00',
-        endTime: '16:00',
-      },
-      {
-        name: 'Bipasha Chatterjee',
-        subject : "Advanced Python",
-        startDate: '2024-01-01',
-        endDate: '2024-12-31',
-        days: ['Monday', 'Wednesday', 'Friday'],
-        startTime: '14:00',
-        endTime: '16:00',
-      },
-      {
-        name: 'Nilanjan Byabrata',
-        subject : "Advanced C#",
-        startDate: '2024-01-01',
-        endDate: '2024-12-31',
-        days: ['Monday', 'Wednesday', 'Friday'],
-        startTime: '14:00',
-        endTime: '16:00',
-      }
-      // Add more mentors as needed
-    ];
+   
+  async function onOpenModal(mentorId) {
+    const {course_alias} = availableMentors.find((mentor)=>mentor.id==mentorId) 
+    const {data : {batch_codes}}  = await axios.get(`http://143.110.181.19/mentoring-api/public/api/get-batch-by-alias/${course_alias}`, {
+    headers: {
+    'accept': '*/*',
+    'Authorization': `Bearer ${token}`,
+    'X-CSRF-TOKEN': ''
+  }
+  })
+  console.log(batch_codes)
+   setBatchCodes(batch_codes)
+   steMentorIdForAssigningStudent(mentorId)
+   setOpenModal(true)
 
+  }
     
+//Assign Students
+const assignStudents = async (e) =>{
+e.preventDefault()
+setLoading(true)
+try{
+const response = await axios.post('http://143.110.181.19/mentoring-api/public/api/assign-student' ,{mentor_scheduling_id : mentorIdForAssigningStudent , batch_code : batchCode , students : selectedStudents }  , 
+  {
+   
+   headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/x-www-form-urlencoded',
+     'Authorization': `Bearer ${token}`
+    
+   },
+ })
+ toast.success('🦄 Students Assigned Successfully');
+setLoading(false)
+}
+catch(e){
+  toast.error('Students Assignment Unsuccessfull');
+}
 
-  const students = ["Souryadeep Das" , "Anshuman Gupta" , "Debasish Mallick" , "Allankriti Mallick"]
-  return  ( <><div className="flex justify-center"><h1 class="text-3xl text-blue-400 mb-4 font-extrabold">Available Mentor</h1></div><Accordion className='shadow-lg'>
-    {mentors.map((mentor)=>{
-        return <Accordion.Panel>
-        <Accordion.Title>{mentor.name} -  {mentor.subject}</Accordion.Title>
+}
+
+
+
+
+  return  ( loading===true ?<Spinner/> : <><div className="flex justify-center"><h1 class="text-3xl text-blue-400 mb-4 font-extrabold">Available Mentor</h1></div><Accordion className='shadow-lg'>
+    {availableMentors.map((mentor)=>{
+        return <Accordion.Panel id={mentor?.id}>
+        <Accordion.Title>{mentor?.name} -  {mentor?.course_name}</Accordion.Title>
         <Accordion.Content className='place-content-between'>
-         <div className="flex justify-between md:text-large"><div><span className='text-green-600 text-lg font-bold'>Start Date</span> : <span className='text-xs font-extrabold text-red-500'>{mentor.startDate}</span></div><div><span className='text-green-600 text-lg font-bold'>End Date :</span> <span className='text-xs font-extrabold text-red-500'>{mentor.endDate}</span></div></div>
-         {mentor.days.map((day)=>{
-            return <div><span className='text-green-600 text-lg font-bold'>{day}  : </span>  <span className='text-xs font-extrabold text-red-500'>{mentor.startTime} - {mentor.endTime}</span></div>
+         <div className="flex justify-between md:text-large"><div><span className='text-green-600 text-lg font-bold'>Start Date</span> : <span className='text-xs font-extrabold text-red-500'>{mentor?.start_date}</span></div><div><span className='text-green-600 text-lg font-bold'>End Date :</span> <span className='text-xs font-extrabold text-red-500'>{mentor.end_date}</span></div></div>
+         {mentor.day_name.map((day)=>{
+            return <div><span className='text-green-600 text-lg font-bold'>{day}  : </span>  <span className='text-xs font-extrabold text-red-500'>{mentor?.start_time} - {mentor?.end_time}</span></div>
          })}
          
-      <div className="flex justify-end"><Button onClick={() => setOpenModal(true)}>Assign Student</Button></div>
+      <div className="flex justify-end"><Button onClick = { (e)=> onOpenModal(mentor?.id)} >Assign Student</Button></div>
       
          
         </Accordion.Content>
@@ -66,30 +131,52 @@ export default function AvailableMentor() {
   
 }
 </Accordion>
-<Modal show={openModal} size="md" onClose={onCloseModal} popup>
+{/* For Assigning Student */}
+<Modal show={openModal} size="md" onClose={onCloseModal} popup >
         <Modal.Header/>
-        <Modal.Body className='h-full'>
+        <Modal.Body className='h-full' >
+         <form onSubmit={assignStudents}>
         <Accordion >
         <Accordion.Panel>
           <Accordion.Title>Student Batch</Accordion.Title>
           <Accordion.Content> 
-        { students.map((student) => {
+          {/* Select Batch Alias */}
+          <div className="max-w-md">
+      <div className="mb-2 block">
+        <Label className='text-yellow-400' htmlFor="batch-code" value="Select Batch Code" />
+      </div>
+      <Select id="batch-code" onChange={fetchStudentsByCourseAlias} required>
+       
+       {batchCodes?.map(({batch_code})=>{
+             
+             return <option>{batch_code}</option>
+       })  
+       }
+       
+      </Select>
+    </div>
+
+        <div className="mt-4">{ students?.map((student) => {
+         
           return<div className="flex items-center gap-2">    
-        <Checkbox id="accept" defaultChecked />
+        <Checkbox id="accept" value={student?.member_code} onChange={(e)=>{setSelectedStudents((prevSelectedStudents)=>{
+        return [...prevSelectedStudents , e.target.value]
+        })}} />
         <Label htmlFor="accept" className="flex">
-          {student}
+          {student.first_name} {student.last_name}
         </Label>
         </div>
     
           
         
          })}
+         </div>
            </Accordion.Content>
           </Accordion.Panel>
      
          </Accordion>
           <div className="flex justify-end m-2"><Button type='Submit'>Submit</Button></div>
-        
+          </form> 
           </Modal.Body> 
       </Modal>
 </>

@@ -33,7 +33,7 @@ export default function SignUp(){
          method: 'post',
          headers: {
            'Accept': 'application/json',
-           'Content-Type': 'application/x-www-form-urlencoded',
+           'Content-Type': 'multipart/form-data',
           
          },
        })
