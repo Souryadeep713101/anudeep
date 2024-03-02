@@ -37,7 +37,7 @@ const onInputChange = (e)=>{
 const handleSubmit = async (e) => {
   e.preventDefault();
    try{
-    const data = { schedule_date : selectedDate, mentor_response_data : formData , type : "response" }
+    const data = { schedule_date : selectedDate, mentor_response_data : formData , type : "session" }
     axios.post(submitMentorResponseURL, data, {
       headers: {
         'Accept': 'application/json',

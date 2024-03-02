@@ -16,7 +16,7 @@ import Student from "./Components/StudentComponents/Student";
 import CommitmentCalendar from "./Components/MentorComponents/CommitmentCalendar";
 import AvailableMentor from "./Components/CentreManagerComponents/AvailableMentor";
 import BookedMentor from "./Components/CentreManagerComponents/BookedMentor";
-import StudentDetails from "./Components/StudentDetails";
+import StudentDetails from "./Components/MentorComponents/StudentDetails";
 import CentreManager from "./Components/CentreManagerComponents/CentreManager";
 import AvailableSessions from "./Components/StudentComponents/AvailableSessions";
 import RateSessions from "./Components/StudentComponents/RateSessions";
@@ -36,7 +36,7 @@ function App() {
          <Route index  element={<SignUp/>}/> 
          <Route path='/login'  element={<Login/>}/>
          <Route path='/About'  element={<About/>}/>     
-         <Route path='/StudentDetails'  element={<StudentDetails/>}/>         
+                 
          </Route>
        {/* Mentor */}
       
@@ -47,6 +47,7 @@ function App() {
         <Route path='/Mentor/CommitmentCalendar'  element={<CommitmentCalendar/>}/> 
         <Route path='/Mentor/SessionPlan'  element={<SessionPlan/>}/> 
         <Route path='/Mentor/ApproveMentor'  element={<Approvals/>}/> 
+        <Route path='/Mentor/StudentDetails'  element={<StudentDetails/>}/> 
         <Route path='/Mentor/About'  element={<About/>}/> 
      
         </Route>
