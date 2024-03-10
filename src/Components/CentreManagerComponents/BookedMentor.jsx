@@ -39,12 +39,13 @@ export default function BookedMentor() {
         return <Accordion.Panel>
         <Accordion.Title>{mentor?.name} -  {mentor?.course_name}</Accordion.Title>
         <Accordion.Content className='place-content-between'>
-         <div className="flex justify-between md:text-large"><div><span className='text-green-600 text-lg font-bold'>Start Date</span> : <span className='text-xs font-extrabold text-red-500'>{mentor.startDate}</span></div><div><span className='text-green-600 text-lg font-bold'>End Date :</span> <span className='text-xs font-extrabold text-red-500'>{mentor.endDate}</span></div></div>
+         <div className="flex justify-between md:text-large"><div><span className='text-green-600 text-lg font-bold'>Start Date</span> : <span className='text-xs font-extrabold text-red-500'>{mentor?.start_date}</span></div><div><span className='text-green-600 text-lg font-bold'>End Date :</span> <span className='text-xs font-extrabold text-red-500'>{mentor?.end_date}</span></div></div>
          {mentor.day_name.map((day)=>{
             return <div><span className='text-green-600 text-lg font-bold'>{day}  : </span>  <span className='text-xs font-extrabold text-red-500'>{mentor?.start_time} - {mentor?.end_time}</span></div>
          })}
          
       <div className="flex flex-col items-center">
+      {/* eslint-disable-next-line */}
       <a href="#" class="font-medium text-lg text-blue-600 dark:text-blue-500 hover:underline">Students List</a>
       <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
    

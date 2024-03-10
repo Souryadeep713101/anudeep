@@ -4,7 +4,7 @@ import ProgrammeView from "./Components/MentorComponents/ProgrammeView";
 import Login from "./Components/LandingComponents/Login";
 import About from "./Components/About";
 import MentorCommitment from "./Components/MentorComponents/MentorCommitment";
-import Approvals from "./Components/Approvals";
+import Approvals from "./Components/ApproverComponents/Approvals";
 import SessionPlan from "./Components/MentorComponents/SessionPlan";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,9 +45,8 @@ function App() {
         <Route index  element={<ProgrammeView/>}/>
         <Route path="/Mentor/MentorCommitment" element={<MentorCommitment/>}/> 
         <Route path='/Mentor/CommitmentCalendar'  element={<CommitmentCalendar/>}/> 
-        <Route path='/Mentor/SessionPlan'  element={<SessionPlan/>}/> 
-        <Route path='/Mentor/ApproveMentor'  element={<Approvals/>}/> 
-        <Route path='/Mentor/StudentDetails'  element={<StudentDetails/>}/> 
+        <Route path='/Mentor/SessionPlan'  element={<SessionPlan/>}/>
+       <Route path='/Mentor/StudentDetails'  element={<StudentDetails/>}/> 
         <Route path='/Mentor/About'  element={<About/>}/> 
      
         </Route>
@@ -56,9 +55,9 @@ function App() {
         {/* Student */}
 
         <Route  path="/Student"  element = {<Student/>}>
+          <Route index  element={<AvailableSessions/>}/> 
           <Route path='/Student/About'  element={<About/>}/>
           <Route path='/Student/StudentAspiration'  element={<StudentAspiration/>}/>  
-          <Route path='/Student/AvailableSessions'  element={<AvailableSessions/>}/> 
           <Route path='/Student/RateSessions'  element={<RateSessions/>}/> 
          </Route>
 

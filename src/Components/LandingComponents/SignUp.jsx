@@ -24,11 +24,11 @@ export default function SignUp(){
       e.preventDefault();
       try {
         
-     console.log(formData)
+
      
 
       //Registered Mentor
-      const response  = await axios.post(registerMentorURL , formData, 
+       await axios.post(registerMentorURL , formData, 
         {
          method: 'post',
          headers: {
@@ -37,7 +37,7 @@ export default function SignUp(){
           
          },
        })
-      console.log(response)
+     
 
       
     
@@ -53,7 +53,7 @@ export default function SignUp(){
       });
       }
       catch(ex) {
-         console.log(ex)
+        toast.error("Unsuccessfull Submission")
       }
     }
     return(
@@ -65,11 +65,11 @@ export default function SignUp(){
            
     <TypeAnimation
       sequence={[
-        'Register As Mentor', // Types 'One'
+        'Register As A Mentor', // Types 'One'
         1000, // Waits 1s
-        'Register with Anudeep As Mentor', // Deletes 'One' and types 'Two'
+        'Register with Anudeep As A Mentor', // Deletes 'One' and types 'Two'
         2000, // Waits 2s
-        'Help The Needy By Registering As Mentor', // Types 'Three' without deleting 'Two'
+        'Help The Needy By Registering As A Mentor', // Types 'Three' without deleting 'Two'
       
       ]}
       wrapper="span"

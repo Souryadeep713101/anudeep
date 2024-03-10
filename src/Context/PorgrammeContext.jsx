@@ -34,9 +34,7 @@ const fetchProgrammeDetails = async()=>{
           
           )
        
-   
-       
-     console.log(response.data)
+
         setProgrammeDetails(response.data.programmes);
      
         
@@ -56,7 +54,7 @@ const fetchProgrammeDetails = async()=>{
 
 }
 fetchProgrammeDetails();
-} , [anudeepProgrammeURL , userDetails.token])
+} , [anudeepProgrammeURL , userDetails.token , navigate])
 
     
 

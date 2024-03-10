@@ -2,11 +2,10 @@ import React    from 'react'
 import {Link, Outlet } from "react-router-dom"
 import { Navbar } from 'flowbite-react'
 import Footer from '../AnudipFooter';
-import UserContext from '../../Context/UserContext';
 import UserAvatarButton from '../UserAvatarButton';
 export default function Mentor() {
 
-  console.log("Mentor")
+ 
   return (
    <>
     <Navbar
@@ -53,6 +52,15 @@ export default function Mentor() {
          <Link to="SessionPlan">Session Plan</Link>
        </Navbar.Link>
   
+       
+       <Navbar.Link>
+
+      <Link to="StudentDetails">Student Dashboard</Link>
+       </Navbar.Link>
+
+       
+       
+       
        <Navbar.Link>
   
     
@@ -60,6 +68,8 @@ export default function Mentor() {
   
          <Link to="About">About</Link>
        </Navbar.Link>
+
+
       
       <li><UserAvatarButton /></li>
        

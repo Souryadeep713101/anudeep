@@ -24,7 +24,7 @@ export default function UserAvatarButton() {
   }
   return (
     <Dropdown
-    label={<Avatar alt="User settings" img="" rounded  size="sm"/>}
+    label={<Avatar alt="User settings" img={user_image ?? ""} rounded  size="sm"/>}
     arrowIcon={false}
     inline
   >

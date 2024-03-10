@@ -21,7 +21,7 @@ else{
 
 });
 useEffect(()=>{
-    console.log("Context view")
+   
     } , [])
 
 

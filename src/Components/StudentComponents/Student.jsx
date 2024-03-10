@@ -28,7 +28,7 @@ function Student() {
 
     <Navbar.Link>
 
-    <Link to="/Student/AvailableSessions">Availble Sessions</Link>
+    <Link to="/Student">Availble Sessions</Link>
      </Navbar.Link>
      <Navbar.Link
        
@@ -42,7 +42,16 @@ function Student() {
        </Navbar.Link>
 
 
-   
+       <Navbar.Link
+       
+        
+       >
+  
+    
+  
+  
+         <Link to="RateSessions">Rate Sessions</Link>
+       </Navbar.Link>
 
 
 

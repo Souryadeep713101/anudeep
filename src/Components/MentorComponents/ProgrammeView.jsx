@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import SignUp from '../LandingComponents/SignUp'
 import { useNavigate } from 'react-router-dom';
 import { toast , Bounce} from 'react-toastify';
 import ProgrammeContext from '../../Context/PorgrammeContext';
-import MentorCommitment from './MentorCommitment';
+
 
 
 export default function ProgrammeView() {
@@ -31,7 +30,6 @@ export default function ProgrammeView() {
       return programme.programmeName === e.target.value
     }))
     setPdfLink(programme.programmeDetails)
-    console.log(programme.mentorDuties)
    setMentorDuties(programme.mentorDuties)
   }
 

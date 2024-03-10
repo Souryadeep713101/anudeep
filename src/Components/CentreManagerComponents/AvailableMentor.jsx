@@ -1,6 +1,5 @@
 import React , {useEffect, useState , useContext} from 'react'
-import { Accordion,AccordionContent,Button , Modal } from 'flowbite-react';
-import { useNavigate } from 'react-router-dom';
+import { Accordion,Button , Modal } from 'flowbite-react';
 import { Checkbox, Label, Select} from 'flowbite-react';
 import UserContext from '../../Context/UserContext';
 import axios from 'axios';
@@ -18,8 +17,10 @@ export default function AvailableMentor() {
   const [availableMentors ,  setAvailableMentors] = useState([])
   const [students , setStudents]  = useState([])
   const [loading ,  setLoading] = useState(false);
-  console.log(availableMentors)
   const getMentorAvailabilityURL = process.env.REACT_APP_ANUDEEP_GET_MENTOR_AVAILABILITY
+  const getBatchByAlias = process.env.REACT_APP_ANUDEEP_GET_BATCH_BY_ALIAS
+  const getStudentByBatchURL = process.env.REACT_APP_ANUDEEP_GET_STUDENT_BY_BATCH
+  const assignStudentURL = process.env.REACT_APP_ANUDEEP_ASSIGN_STUDENT
   const {userDetails : {token}} = useContext(UserContext)
    useEffect(()=>{
     
@@ -34,7 +35,7 @@ export default function AvailableMentor() {
         }
       })
       setAvailableMentors(schedule_details.filter((mentor)=>{
-        return mentor.students.length == 0;
+        return mentor.students.length === 0;
       }))
       
     }
@@ -47,10 +48,11 @@ export default function AvailableMentor() {
 
 //Fetching Students According to Course Alias
 
-async function fetchStudentsByCourseAlias(e){
+async function fetchStudentsByBatchCode(e){
    
 
-  const {data : {students}} = await axios.get(`http://143.110.181.19/mentoring-api/public/api/get-student-by-batch/${e.target.value}`, {
+ try{
+  const {data : {students}} = await axios.get(`${getStudentByBatchURL}/${e.target.value}`, {
     headers: {
       'accept': '*/*',
       'Authorization': `Bearer ${token}`,
@@ -59,7 +61,10 @@ async function fetchStudentsByCourseAlias(e){
   })
    setStudents(students)
    setBatchCode(e.target.value)
-   
+}
+catch(e){
+ 
+}
 
 }
 
@@ -70,15 +75,15 @@ async function fetchStudentsByCourseAlias(e){
   }
    
   async function onOpenModal(mentorId) {
-    const {course_alias} = availableMentors.find((mentor)=>mentor.id==mentorId) 
-    const {data : {batch_codes}}  = await axios.get(`http://143.110.181.19/mentoring-api/public/api/get-batch-by-alias/${course_alias}`, {
+    const {course_alias} = availableMentors.find((mentor)=>mentor.id===mentorId) 
+    const {data : {batch_codes}}  = await axios.get(`${getBatchByAlias}/${course_alias}`, {
     headers: {
     'accept': '*/*',
     'Authorization': `Bearer ${token}`,
     'X-CSRF-TOKEN': ''
   }
   })
-  console.log(batch_codes)
+
    setBatchCodes(batch_codes)
    steMentorIdForAssigningStudent(mentorId)
    setOpenModal(true)
@@ -90,7 +95,7 @@ const assignStudents = async (e) =>{
 e.preventDefault()
 setLoading(true)
 try{
-const response = await axios.post('http://143.110.181.19/mentoring-api/public/api/assign-student' ,{mentor_scheduling_id : mentorIdForAssigningStudent , batch_code : batchCode , students : selectedStudents }  , 
+ await axios.post(assignStudentURL ,{mentor_scheduling_id : mentorIdForAssigningStudent , batch_code : batchCode , students : selectedStudents }  , 
   {
    
    headers: {
@@ -145,7 +150,7 @@ catch(e){
       <div className="mb-2 block">
         <Label className='text-yellow-400' htmlFor="batch-code" value="Select Batch Code" />
       </div>
-      <Select id="batch-code" onChange={fetchStudentsByCourseAlias} required>
+      <Select id="batch-code" onChange={fetchStudentsByBatchCode} required>
        
        {batchCodes?.map(({batch_code})=>{
              

@@ -7,7 +7,7 @@ export default function Landing() {
 const  {loggedIn ,userDetails} = useContext(UserContext)
 const userType = userDetails?.userDetails?.role_name;
 
-console.log(loggedIn)
+
     
   return loggedIn && userType!=null ? userType==="mentor"?(<Navigate to="/Mentor" />) :userType==="mne" || userType==="trainer" ?(<Navigate to="/Approver" />) : userType==="student" ?(<Navigate to="/Student" />) : userType ==="Centre Manager" ? (<Navigate to="/CentreManager" />) : (<Navigate to="/login" />)   : (<>  <Navbar
     fluid={true}

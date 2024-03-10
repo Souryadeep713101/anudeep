@@ -29,7 +29,7 @@ export default function Login() {
         
         )
      
-      console.log(response)
+     
         toast.success("Login successful!", {
           position: "top-right",
           autoClose: 5000, // milliseconds
@@ -42,7 +42,7 @@ export default function Login() {
       setUsername("");
       setPassword("");
       const userType = response.data.userDetails.role_name;
-      console.log(userType)
+     
       if(userType === "mne"){
         navigate('/Approver')
       }

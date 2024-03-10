@@ -1,4 +1,4 @@
-import React, { useState ,useContext } from "react";
+import React, { useState ,useContext ,useEffect } from "react";
 import { Label , Select } from "flowbite-react";
 import UserContext from '../../Context/UserContext';
 import axios from "axios";
@@ -12,7 +12,7 @@ export default function SessionPlan() {
  const getAcademicScheduleDateURL = process.env.REACT_APP_ANUDEEP_GET_ACADEMIC_SCHEDULE_DATE
  const submitMentorResponseURL = process.env.REACT_APP_ANUDEEP_SUBMIT_MENTOR_RESPONSE
  
- useState(()=>{
+ useEffect(()=>{
    const fetchAcademicScheduleDateDetails = async()=>{
     const {data : {schedule_date}} = await axios.get(getAcademicScheduleDateURL, {
       headers: {
@@ -65,7 +65,8 @@ const handleSubmit = async (e) => {
     <div>
 <div className="max-w-md min-w-60 mx-auto w-4/5 h-4/5 backdrop-blur-[5px] bg-[rgba(255,255,255,0.1)] rounded-lg shadow-2xl">
         <form class="max-w-md mx-auto p-6 md:p-10 " onSubmit={handleSubmit}>
-        <div className="max-w-md">
+          
+        <div className="max-w-md mb-4">
       <div className="mb-2 block">
         <Label htmlFor="academic-schedule-dates" value="Select Academic Schedule Date" />
       </div>

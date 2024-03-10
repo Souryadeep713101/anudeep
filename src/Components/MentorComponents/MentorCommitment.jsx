@@ -1,6 +1,5 @@
 import React , {useState ,useEffect , useContext} from 'react'
 import { Datepicker } from 'flowbite-react';
-import CommitmentCalendar from './CommitmentCalendar';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import UserContext from '../../Context/UserContext';
@@ -38,7 +37,6 @@ function updateTimeInputMin() {
 export default function MentorCommitment() {
 
   const mentorCommitmentURL = process.env.REACT_APP_ANUDEEP_MENTOR_COMMITMENT
-  console.log(mentorCommitmentURL)
   const {programmeDetails} = useContext(ProgrammeContext)
   const {userDetails} = useContext(UserContext)
   const [programmeNamesIDs , setProgrammeNamesIDs] = useState([])
@@ -69,7 +67,7 @@ export default function MentorCommitment() {
    setFormData((prevFormData)=>{
     return {...prevFormData , [e.target.name]  : e.target.value}
    })
-   if(e.target.name == "timeStart") updateTimeInputMin(); 
+   if(e.target.name === "timeStart") updateTimeInputMin(); 
 
  } 
 //Submitted Mentor Commitments 
@@ -79,14 +77,14 @@ try{
 
 
  const {selectedProgramme , programmeTenure ,selectedDays , startDate , timeStart ,timeEnd } = formData;
- console.log(selectedDays)
+
   const data = {program_id : selectedProgramme  , tenure : programmeTenure
     ,start_date : startDate , start_time : timeStart , end_time : timeEnd  ,day_name : selectedDays};
    
 
  
 
- const response  = await axios.post(mentorCommitmentURL ,data , 
+await axios.post(mentorCommitmentURL ,data , 
   {
    
    headers: {
@@ -96,7 +94,7 @@ try{
     
    },
  })
-console.log(response)
+
 toast.success('🦄 Commited Successfully');
 
   
@@ -110,7 +108,7 @@ setSelectedDays([])
 setFormData({})
 }
 catch(e) {
-  console.log(e)
+
   toast.error('Commitment Unsuccessfull');
 }
 

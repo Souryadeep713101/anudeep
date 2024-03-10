@@ -25,11 +25,11 @@
   
   .highlighted-date {
     border: 2.5px solid rgb(115, 78, 188) !important;
-    background-color: #a0b72d;
-    border-radius: 20px;
+    background-color: #e5e561;
+    border-radius: 1.0rem;
     color: white;
-    padding: 1.5rem 0;
     z-index: 2;
+    margin: 2px;
     
   }
   
